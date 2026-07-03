@@ -1,4 +1,49 @@
+"use client";
+
+import { useState } from "react";
+
 export default function Home() {
+  const [purpose, setPurpose] = useState("");
+  const [recipient, setRecipient] = useState("");
+  const [tone, setTone] = useState("");
+  const [generatedEmail, setGeneratedEmail] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    setGeneratedEmail("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ purpose, recipient, tone }),
+      });
+
+      const data = (await response.json()) as {
+        email?: string;
+        error?: string;
+        details?: string;
+      };
+
+      if (!response.ok) {
+        throw new Error(data.error ?? data.details ?? "Failed to generate email.");
+      }
+
+      setGeneratedEmail(data.email ?? "");
+    } catch (submitError) {
+      const message = submitError instanceof Error ? submitError.message : "Something went wrong.";
+      setError(message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#07111f] text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(74,222,128,0.22),_transparent_36%),radial-gradient(circle_at_top_right,_rgba(96,165,250,0.2),_transparent_30%),linear-gradient(180deg,_#07111f_0%,_#0b1729_55%,_#08101d_100%)]" />
@@ -40,7 +85,7 @@ export default function Home() {
               <h2 className="text-2xl font-semibold text-white">Generate your draft</h2>
             </div>
 
-            <form className="space-y-5">
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label htmlFor="purpose" className="text-sm font-medium text-slate-200">
                   Email purpose
@@ -50,6 +95,8 @@ export default function Home() {
                   name="purpose"
                   rows={4}
                   placeholder="Example: follow up after a product demo and ask for feedback"
+                  value={purpose}
+                  onChange={(event) => setPurpose(event.target.value)}
                   className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10"
                 />
               </div>
@@ -63,6 +110,8 @@ export default function Home() {
                   name="recipient"
                   type="text"
                   placeholder="Example: client, manager, sales lead"
+                  value={recipient}
+                  onChange={(event) => setRecipient(event.target.value)}
                   className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10"
                 />
               </div>
@@ -74,8 +123,9 @@ export default function Home() {
                 <select
                   id="tone"
                   name="tone"
+                  value={tone}
+                  onChange={(event) => setTone(event.target.value)}
                   className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10"
-                  defaultValue=""
                 >
                   <option value="" disabled>
                     Select a tone
@@ -89,11 +139,29 @@ export default function Home() {
 
               <button
                 type="submit"
+                disabled={isLoading}
                 className="inline-flex w-full items-center justify-center rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-300/30"
               >
-                Generate
+                {isLoading ? "Generating..." : "Generate"}
               </button>
             </form>
+
+            {error ? (
+              <p className="mt-5 rounded-2xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+                {error}
+              </p>
+            ) : null}
+
+            {generatedEmail ? (
+              <div className="mt-5 space-y-2 rounded-2xl border border-emerald-400/20 bg-slate-950/40 px-4 py-4">
+                <p className="text-sm font-medium uppercase tracking-[0.2em] text-emerald-200/90">
+                  Generated email
+                </p>
+                <p className="whitespace-pre-wrap text-sm leading-7 text-slate-100">
+                  {generatedEmail}
+                </p>
+              </div>
+            ) : null}
           </div>
         </section>
       </div>
