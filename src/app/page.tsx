@@ -9,11 +9,13 @@ export default function Home() {
   const [generatedEmail, setGeneratedEmail] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [copyMessage, setCopyMessage] = useState("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
     setGeneratedEmail("");
+    setCopyMessage("");
     setIsLoading(true);
 
     try {
@@ -41,6 +43,19 @@ export default function Home() {
       setError(message);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function handleCopyEmail() {
+    if (!generatedEmail) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(generatedEmail);
+      setCopyMessage("Copied to clipboard");
+    } catch {
+      setCopyMessage("Copy failed");
     }
   }
 
@@ -154,12 +169,24 @@ export default function Home() {
 
             {generatedEmail ? (
               <div className="mt-5 space-y-2 rounded-2xl border border-emerald-400/20 bg-slate-950/40 px-4 py-4">
-                <p className="text-sm font-medium uppercase tracking-[0.2em] text-emerald-200/90">
-                  Generated email
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-emerald-200/90">
+                    Generated email
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="rounded-full border border-emerald-300/30 px-3 py-1 text-xs font-medium text-emerald-100 transition hover:bg-emerald-300/10"
+                  >
+                    Copy
+                  </button>
+                </div>
                 <p className="whitespace-pre-wrap text-sm leading-7 text-slate-100">
                   {generatedEmail}
                 </p>
+                {copyMessage ? (
+                  <p className="text-xs text-emerald-200">{copyMessage}</p>
+                ) : null}
               </div>
             ) : null}
           </div>
