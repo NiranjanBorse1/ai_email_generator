@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 
 type GenerateEmailBody = {
   purpose?: string;
@@ -19,11 +20,41 @@ function buildPrompt({ purpose, recipient, tone }: Required<GenerateEmailBody>) 
 export async function POST(request: Request) {
   try {
     const apiKey = process.env.GROQ_API_KEY;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey =
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
     if (!apiKey) {
       return NextResponse.json(
         { error: "Missing GROQ_API_KEY in environment variables." },
         { status: 500 },
+      );
+    }
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      return NextResponse.json(
+        { error: "Missing Supabase environment variables." },
+        { status: 500 },
+      );
+    }
+
+    const authorizationHeader = request.headers.get("authorization");
+
+    if (!authorizationHeader?.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { error: "Unauthorized. Please sign in." },
+        { status: 401 },
+      );
+    }
+
+    const accessToken = authorizationHeader.slice("Bearer ".length);
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const { data: userData, error: userError } = await supabase.auth.getUser(accessToken);
+
+    if (userError || !userData.user) {
+      return NextResponse.json(
+        { error: "Unauthorized. Please sign in again." },
+        { status: 401 },
       );
     }
 
