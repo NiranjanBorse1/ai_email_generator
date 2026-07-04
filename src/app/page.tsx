@@ -77,10 +77,14 @@ export default function Home() {
   }, [supabase]);
 
   useEffect(() => {
-    if (!supabase || !session) {
+    const supabaseClient = supabase;
+
+    if (!supabaseClient || !session) {
       setEmailHistory([]);
       return;
     }
+
+    const client = supabaseClient;
 
     let isMounted = true;
 
@@ -88,7 +92,7 @@ export default function Home() {
       setHistoryLoading(true);
 
       try {
-        const { data, error: fetchError } = await supabase
+        const { data, error: fetchError } = await client
           .from("email_drafts")
           .select("id,text,created_at")
           .order("created_at", { ascending: false })
