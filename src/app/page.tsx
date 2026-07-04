@@ -137,8 +137,8 @@ export default function Home() {
   const isAuthenticated = Boolean(session);
 
   const pageClasses = isDark
-    ? "relative min-h-screen overflow-hidden bg-[#07111f] text-white"
-    : "relative min-h-screen overflow-hidden bg-[#f7fafc] text-slate-900";
+    ? "relative min-h-[100svh] overflow-x-hidden bg-[#07111f] text-white"
+    : "relative min-h-[100svh] overflow-x-hidden bg-[#f7fafc] text-slate-900";
 
   const backgroundClasses = isDark
     ? "absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(74,222,128,0.22),_transparent_36%),radial-gradient(circle_at_top_right,_rgba(96,165,250,0.2),_transparent_30%),linear-gradient(180deg,_#07111f_0%,_#0b1729_55%,_#08101d_100%)]"
@@ -149,56 +149,56 @@ export default function Home() {
     : "absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.06)_1px,transparent_1px)] bg-[size:64px_64px] opacity-35";
 
   const pillClasses = isDark
-    ? "inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-emerald-200 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur"
-    : "inline-flex items-center rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur";
+    ? "inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-emerald-200 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] backdrop-blur sm:px-4 sm:text-sm"
+    : "inline-flex items-center rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs font-medium text-slate-700 shadow-sm backdrop-blur sm:px-4 sm:text-sm";
 
   const heroTitleClasses = isDark
-    ? "text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl"
-    : "text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl";
+    ? "text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-6xl"
+    : "text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl lg:text-6xl";
 
   const heroTextClasses = isDark
-    ? "max-w-lg text-base leading-7 text-slate-300 sm:text-lg"
-    : "max-w-lg text-base leading-7 text-slate-600 sm:text-lg";
+    ? "max-w-lg text-sm leading-6 text-slate-300 sm:text-base sm:leading-7 lg:text-lg"
+    : "max-w-lg text-sm leading-6 text-slate-600 sm:text-base sm:leading-7 lg:text-lg";
 
   const featureCardClasses = isDark
-    ? "rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur"
-    : "rounded-2xl border border-slate-200 bg-white/80 p-4 text-slate-700 shadow-sm backdrop-blur";
+    ? "rounded-2xl border border-white/10 bg-white/5 p-3 text-sm backdrop-blur sm:p-4"
+    : "rounded-2xl border border-slate-200 bg-white/80 p-3 text-sm text-slate-700 shadow-sm backdrop-blur sm:p-4";
 
   const panelClasses = isDark
-    ? "rounded-3xl border border-white/10 bg-white/10 p-4 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-6 lg:p-8"
-    : "rounded-3xl border border-slate-200 bg-white/85 p-4 shadow-xl shadow-slate-200/60 backdrop-blur-xl sm:p-6 lg:p-8";
+    ? "rounded-3xl border border-white/10 bg-white/10 p-3 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-4 lg:p-8"
+    : "rounded-3xl border border-slate-200 bg-white/85 p-3 shadow-xl shadow-slate-200/60 backdrop-blur-xl sm:p-4 lg:p-8";
 
   const sectionLabelClasses = isDark
     ? "text-sm font-medium uppercase tracking-[0.24em] text-emerald-200/90"
     : "text-sm font-medium uppercase tracking-[0.24em] text-sky-700";
 
   const sectionTitleClasses = isDark
-    ? "text-2xl font-semibold text-white"
-    : "text-2xl font-semibold text-slate-950";
+    ? "text-xl font-semibold text-white sm:text-2xl"
+    : "text-xl font-semibold text-slate-950 sm:text-2xl";
 
   const labelClasses = isDark
-    ? "text-sm font-medium text-slate-200"
-    : "text-sm font-medium text-slate-700";
+    ? "text-xs font-medium text-slate-200 sm:text-sm"
+    : "text-xs font-medium text-slate-700 sm:text-sm";
 
   const inputClasses = isDark
-    ? "w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10"
-    : "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100";
+    ? "w-full rounded-2xl border border-white/10 bg-slate-950/40 px-3 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10 sm:px-4"
+    : "w-full rounded-2xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100 sm:px-4";
 
   const selectClasses = isDark
-    ? "w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10"
-    : "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100";
+    ? "w-full rounded-2xl border border-white/10 bg-slate-950/40 px-3 py-3 text-sm text-white outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10 sm:px-4"
+    : "w-full rounded-2xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100 sm:px-4";
 
   const buttonClasses = isDark
-    ? "inline-flex w-full items-center justify-center rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-300/30"
-    : "inline-flex w-full items-center justify-center rounded-2xl bg-sky-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-400 focus:outline-none focus:ring-4 focus:ring-sky-200";
+    ? "inline-flex w-full items-center justify-center rounded-2xl bg-emerald-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-300/30 sm:px-5"
+    : "inline-flex w-full items-center justify-center rounded-2xl bg-sky-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-sky-400 focus:outline-none focus:ring-4 focus:ring-sky-200 sm:px-5";
 
   const errorClasses = isDark
     ? "mt-5 rounded-2xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200"
     : "mt-5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700";
 
   const outputPanelClasses = isDark
-    ? "mt-5 space-y-2 rounded-2xl border border-emerald-400/20 bg-slate-950/40 px-4 py-4"
-    : "mt-5 space-y-2 rounded-2xl border border-sky-200 bg-sky-50/80 px-4 py-4";
+    ? "mt-5 space-y-2 rounded-2xl border border-emerald-400/20 bg-slate-950/40 px-3 py-4 sm:px-4"
+    : "mt-5 space-y-2 rounded-2xl border border-sky-200 bg-sky-50/80 px-3 py-4 sm:px-4";
 
   const outputLabelClasses = isDark
     ? "text-sm font-medium uppercase tracking-[0.2em] text-emerald-200/90"
@@ -209,8 +209,8 @@ export default function Home() {
     : "whitespace-pre-wrap text-sm leading-7 text-slate-800";
 
   const copyButtonClasses = isDark
-    ? "rounded-full border border-emerald-300/30 px-3 py-1 text-xs font-medium text-emerald-100 transition hover:bg-emerald-300/10"
-    : "rounded-full border border-sky-300 px-3 py-1 text-xs font-medium text-sky-700 transition hover:bg-sky-100";
+    ? "rounded-full border border-emerald-300/30 px-3 py-1 text-[11px] font-medium text-emerald-100 transition hover:bg-emerald-300/10 sm:text-xs"
+    : "rounded-full border border-sky-300 px-3 py-1 text-[11px] font-medium text-sky-700 transition hover:bg-sky-100 sm:text-xs";
 
   const copyMessageClasses = isDark ? "text-xs text-emerald-200" : "text-xs text-sky-700";
 
@@ -219,20 +219,20 @@ export default function Home() {
     : "inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-800 shadow-sm transition hover:bg-slate-50";
 
   const authShellClasses = isDark
-    ? "rounded-3xl border border-white/10 bg-slate-950/40 p-4 backdrop-blur"
-    : "rounded-3xl border border-slate-200 bg-slate-50/90 p-4 backdrop-blur";
+    ? "rounded-3xl border border-white/10 bg-slate-950/40 p-3 backdrop-blur sm:p-4"
+    : "rounded-3xl border border-slate-200 bg-slate-50/90 p-3 backdrop-blur sm:p-4";
 
   const authInputClasses = isDark
-    ? "w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10"
-    : "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100";
+    ? "w-full rounded-2xl border border-white/10 bg-slate-950/60 px-3 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-300/10 sm:px-4"
+    : "w-full rounded-2xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100 sm:px-4";
 
   const authButtonPrimaryClasses = isDark
-    ? "inline-flex w-full items-center justify-center rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-300/30"
-    : "inline-flex w-full items-center justify-center rounded-2xl bg-sky-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-400 focus:outline-none focus:ring-4 focus:ring-sky-200";
+    ? "inline-flex w-full items-center justify-center rounded-2xl bg-emerald-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-300/30 sm:px-5"
+    : "inline-flex w-full items-center justify-center rounded-2xl bg-sky-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-sky-400 focus:outline-none focus:ring-4 focus:ring-sky-200 sm:px-5";
 
   const authButtonSecondaryClasses = isDark
-    ? "inline-flex w-full items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-white/10"
-    : "inline-flex w-full items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200";
+    ? "inline-flex w-full items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-white/10 sm:px-5"
+    : "inline-flex w-full items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200 sm:px-5";
 
   const authNoticeClasses = isDark
     ? "rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200"
@@ -407,10 +407,10 @@ export default function Home() {
       <div className={backgroundClasses} />
       <div className={gridClasses} />
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-6xl items-center px-6 py-12 sm:px-10 lg:px-12">
-        <section className="grid w-full gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="max-w-xl space-y-6">
-            <div className="flex flex-wrap items-center gap-3">
+      <div className="relative mx-auto flex min-h-[100svh] w-full max-w-6xl items-start px-4 py-6 sm:items-center sm:px-6 sm:py-10 lg:px-12">
+        <section className="grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-10">
+          <div className="max-w-xl space-y-4 sm:space-y-6">
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <span className={pillClasses}>AI Email Generator</span>
               <button
                 type="button"
@@ -421,14 +421,14 @@ export default function Home() {
                 <span>{isDark ? "Dark mode" : "Light mode"}</span>
               </button>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <h1 className={heroTitleClasses}>Write better emails faster with a simple prompt.</h1>
               <p className={heroTextClasses}>
                 Tell the app what the email is for, who it is going to, and the tone you want. The generator will handle the draft next.
               </p>
             </div>
 
-            <div className="grid gap-3 text-sm sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
               <div className={featureCardClasses}>Clear inputs</div>
               <div className={featureCardClasses}>Fast workflow</div>
               <div className={featureCardClasses}>Ready for Supabase auth</div>
