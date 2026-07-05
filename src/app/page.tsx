@@ -347,6 +347,9 @@ export default function Home() {
           : await supabase.auth.signUp({
               email: trimmedEmail,
               password: authPassword,
+              options: {
+                emailRedirectTo: window.location.origin,
+              },
             });
 
       if (result.error) {
